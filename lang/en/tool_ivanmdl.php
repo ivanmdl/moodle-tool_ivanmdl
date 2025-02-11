@@ -15,10 +15,9 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- *  tool_ivanmdl.php description here.
- *
- * @package
- * @copyright  2025 ivanstankovic <>
+ * Language file for my first plugin
+ * @package tool_ivanmdl
+ * @copyright 2025, Ivan Stankovic <ivan.stankovic@moodle.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 

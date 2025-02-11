@@ -15,6 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
+ * Version for my first plugin
  * @package   tool_ivanmdl
  * @copyright 2025, Ivan Stankovic <ivan.stankovic@moodle.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -23,8 +24,5 @@
 defined('MOODLE_INTERNAL') || die();
 
 $plugin->version = 2025021000;
-//$plugin->requires = 2022041900.00; // Moodle 4.0.
-//$plugin->supported = [400, 400];
-//$plugin->incompatible = 401;
 $plugin->component = 'tool_ivanmdl';
 $plugin->release = '1.0';
