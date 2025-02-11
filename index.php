@@ -15,11 +15,20 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Language file for my first plugin
+ *  index.php description here.
+ *
  * @package tool_ivanmdl
- * @copyright 2025, Ivan Stankovic <ivan.stankovic@moodle.com>
+ * @copyright  2025 ivanstankovic <ivan.stankovic@moodle.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-$string['hello_world'] = 'Hello World';
-$string['pluginname'] = 'My first Moodle plugin';
+require_once(__DIR__ . '/../../../config.php');
+require_login();
+$url = new moodle_url('/admin/tool/ivanmdl/index.php');
+$PAGE->set_context(context_system::instance());
+$PAGE->set_url($url);
+$PAGE->set_pagelayout('report');
+$PAGE->set_title('Hello to the ivanmdl list');
+$PAGE->set_heading(get_string('pluginname', 'tool_ivanmdl'));
+
+echo get_string('hello_world', 'tool_ivanmdl');
