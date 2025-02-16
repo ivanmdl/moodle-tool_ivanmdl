@@ -23,12 +23,25 @@
  */
 
 require_once(__DIR__ . '/../../../config.php');
+require_once($CFG->libdir . '/adminlib.php');
+
 require_login();
 $url = new moodle_url('/admin/tool/ivanmdl/index.php');
+$title = get_string('pluginname', 'tool_ivanmdl');
 $PAGE->set_context(context_system::instance());
 $PAGE->set_url($url);
 $PAGE->set_pagelayout('report');
 $PAGE->set_title('Hello to the ivanmdl list');
-$PAGE->set_heading(get_string('pluginname', 'tool_ivanmdl'));
+$PAGE->set_heading($title);
 
-echo get_string('hello_world', 'tool_ivanmdl');
+$id = optional_param('id', 0, PARAM_INT);
+$cleanedid = clean_param($id, PARAM_INT);
+
+echo $OUTPUT->header();
+echo $OUTPUT->heading($title);
+
+echo html_writer::div(get_string('hello_world', 'tool_ivanmdl', $cleanedid));
+
+echo $OUTPUT->footer();
+
+
