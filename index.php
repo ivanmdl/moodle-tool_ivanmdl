@@ -38,12 +38,23 @@ $PAGE->set_pagelayout('report');
 $PAGE->set_title('Hello to the ivanmdl list');
 $PAGE->set_heading($title);
 
-$id = optional_param('id', 0, PARAM_INT);
+$usercount = $DB->count_records('user', ['deleted' => 0]);
+
+$enrolledusers = $DB->count_records_sql("
+    SELECT COUNT(*)
+      FROM {user_enrolments} ue
+      JOIN {enrol} e ON ue.enrolid = e.id
+     WHERE e.courseid = ?",
+    [$id]
+);
 
 echo $OUTPUT->header();
 echo $OUTPUT->heading($title);
 
 echo html_writer::div(get_string('hello_world', 'tool_ivanmdl', $cleanedid));
+
+echo html_writer::div('Total Registered Users:' . $usercount);
+echo html_writer::div('Enrolled Users in this Course:' . $enrolledusers);
 
 echo $OUTPUT->footer();
 
