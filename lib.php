@@ -15,36 +15,36 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- *  index.php description here.
+ *  lib.php description here.
  *
  * @package tool_ivanmdl
  * @copyright  2025 ivanstankovic <ivan.stankovic@moodle.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-require_once(__DIR__ . '/../../../config.php');
-require_once($CFG->libdir . '/adminlib.php');
+/**
+ * This function extends the course navigation with the plugin link
+ *
+ * @param navigation_node $navref
+ * @param stdClass $course
+ * @param context $context
+ * @return void
+ * @throws \core\exception\moodle_exception
+ * @throws coding_exception
+ */
+function tool_ivanmdl_extend_navigation_course(navigation_node $navref, \stdClass $course, \context $context) {
+    global $PAGE;
 
-$id = required_param('id', PARAM_INT);
-$cleanedid = clean_param($id, PARAM_INT);
-$course = get_course($cleanedid);
+        $url = new moodle_url('/admin/tool/ivanmdl/index.php', ['id' => $course->id]);
 
-require_login();
-$url = new moodle_url('/admin/tool/ivanmdl/index.php', ['id' => $cleanedid]);
-$title = get_string('pluginname', 'tool_ivanmdl');
-$PAGE->set_context(context_system::instance());
-$PAGE->set_url($url);
-$PAGE->set_pagelayout('report');
-$PAGE->set_title('Hello to the ivanmdl list');
-$PAGE->set_heading($title);
+        $navref->add(
+            get_string('pluginname', 'tool_ivanmdl'),
+            $url,
+            navigation_node::TYPE_SETTING,
+            null,
+            'ivanmdleterw'
+        );
 
-$id = optional_param('id', 0, PARAM_INT);
-
-echo $OUTPUT->header();
-echo $OUTPUT->heading($title);
-
-echo html_writer::div(get_string('hello_world', 'tool_ivanmdl', $cleanedid));
-
-echo $OUTPUT->footer();
+}
 
 
