@@ -56,6 +56,9 @@ echo html_writer::div(get_string('hello_world', 'tool_ivanmdl', $cleanedid));
 echo html_writer::div('Total Registered Users:' . $usercount);
 echo html_writer::div('Enrolled Users in this Course:' . $enrolledusers);
 
+$table = new tool_ivanmdl_table('tool_ivanmdl', $id);
+echo $table->out(20, true);
+
 echo $OUTPUT->footer();
 
 

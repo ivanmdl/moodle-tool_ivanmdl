@@ -21,5 +21,10 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+$string['completed'] = 'Completed';
+$string['created'] = 'Created';
 $string['hello_world'] = 'Hello World {$a}';
+$string['id'] = 'Id';
+$string['name'] = 'Name';
 $string['pluginname'] = 'My first Moodle plugin';
+$string['priority'] = 'Priority';
