@@ -32,8 +32,8 @@ require_once($CFG->libdir . '/tablelib.php');
 class tool_ivanmdl_table extends table_sql {
     /**
      * Sets up table sql
-     * @param $uniqueid
-     * @param $courseid
+     * @param string  $uniqueid
+     * @param int $courseid
      */
     public function __construct($uniqueid, $courseid) {
         parent::__construct($uniqueid);
@@ -59,7 +59,7 @@ class tool_ivanmdl_table extends table_sql {
 
     /**
      * Displays and formats column name
-     * @param $row
+     * @param stdClass $row
      * @return string
      */
     public function col_name($row) {

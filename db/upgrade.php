@@ -24,7 +24,7 @@
 
 /**
  * Function for updating db
- * @param $oldversion
+ * @param int $oldversion
  * @return true
  */
 function xmldb_tool_ivanmdl_upgrade($oldversion) {
