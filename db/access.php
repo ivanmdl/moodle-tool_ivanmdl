@@ -15,15 +15,23 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Version for my first plugin
- * @package   tool_ivanmdl
- * @copyright 2025, Ivan Stankovic <ivan.stankovic@moodle.com>
- * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ *  access.php description here.
+ *
+ * @package tool_ivanmdl
+ * @copyright  2025 ivanstankovic <ivan.stankovic@moodle.com>
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version = 2025022201;
-$plugin->component = 'tool_ivanmdl';
-$plugin->release = '1.5';
+$capabilities = [
+    'tool/ivanmdl:view' => [
+        'captype' => 'read',
+        'contextlevel' => CONTEXT_COURSE,
+    ],
 
+    'tool/johnsmith:edit' => [
+        'captype' => 'write',
+        'contextlevel' => CONTEXT_COURSE,
+    ],
+];
