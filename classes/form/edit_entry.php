@@ -57,8 +57,9 @@ class edit_entry extends \moodleform {
 
     /**
      * Method for form validation
-     * @param $data
-     * @param $files
+     *
+     * @param array $data
+     * @param array $files
      * @return array
      */
     public function validation($data, $files) {

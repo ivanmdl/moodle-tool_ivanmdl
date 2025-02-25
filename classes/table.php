@@ -69,7 +69,7 @@ class tool_ivanmdl_table extends table_sql {
 
     /**
      * Dispalys column with edit icon
-     * @param $row
+     * @param stdClass $row
      * @return string
      */
     public function col_edit($row) {
