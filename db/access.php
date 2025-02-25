@@ -30,7 +30,7 @@ $capabilities = [
         'contextlevel' => CONTEXT_COURSE,
     ],
 
-    'tool/johnsmith:edit' => [
+    'tool/ivanmdl:edit' => [
         'captype' => 'write',
         'contextlevel' => CONTEXT_COURSE,
     ],

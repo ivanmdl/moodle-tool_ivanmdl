@@ -38,17 +38,18 @@ class tool_ivanmdl_table extends table_sql {
     public function __construct($uniqueid, $courseid) {
         parent::__construct($uniqueid);
 
-        $this->define_columns(['id', 'name', 'completed', 'priority', 'timecreated']);
+        $this->define_columns(['id', 'name', 'completed', 'priority', 'timecreated', 'edit']);
         $this->define_headers([
             get_string('id', 'tool_ivanmdl'),
             get_string('name', 'tool_ivanmdl'),
             get_string('completed', 'tool_ivanmdl'),
             get_string('priority', 'tool_ivanmdl'),
             get_string('created', 'tool_ivanmdl'),
+            get_string('edit', 'tool_ivanmdl'),
         ]);
 
         $this->set_sql(
-            'id, name, completed, priority, timecreated',
+            'id, name, completed, priority, timecreated, courseid',
             '{tool_ivanmdl}',
             'courseid = ?',
             [$courseid]
@@ -64,5 +65,22 @@ class tool_ivanmdl_table extends table_sql {
      */
     public function col_name($row) {
         return format_string($row->name);
+    }
+
+    /**
+     * Dispalys column with edit icon
+     * @param $row
+     * @return string
+     */
+    public function col_edit($row) {
+        global $OUTPUT;
+        $context = context_course::instance($row->courseid);
+
+        if (has_capability('tool/ivanmdl:edit', $context)) {
+            $editurl = new moodle_url('/admin/tool/ivanmdl/edit.php', ['entryid' => $row->id]);
+            return $OUTPUT->action_icon($editurl, new pix_icon('t/edit', get_string('edit')));
+        }
+
+        return '';
     }
 }

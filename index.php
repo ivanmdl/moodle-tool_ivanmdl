@@ -30,6 +30,10 @@ $cleanedid = clean_param($id, PARAM_INT);
 $course = get_course($cleanedid);
 
 require_login();
+$context = context_course::instance($cleanedid);
+require_capability('tool/ivanmdl:view', $context); // Ensure user has permission to view.
+
+
 $url = new moodle_url('/admin/tool/ivanmdl/index.php', ['id' => $cleanedid]);
 $title = get_string('pluginname', 'tool_ivanmdl');
 $PAGE->set_context(context_system::instance());
@@ -55,6 +59,11 @@ echo html_writer::div(get_string('hello_world', 'tool_ivanmdl', $cleanedid));
 
 echo html_writer::div('Total Registered Users:' . $usercount);
 echo html_writer::div('Enrolled Users in this Course:' . $enrolledusers);
+
+if (has_capability('tool/ivanmdl:edit', $context)) {
+    $addentryurl = new moodle_url('/admin/tool/ivanmdl/edit.php', ['courseid' => $cleanedid]);
+    echo $OUTPUT->single_button($addentryurl, get_string('addentry', 'tool_ivanmdl'));
+}
 
 $table = new tool_ivanmdl_table('tool_ivanmdl', $id);
 echo $table->out(20, true);

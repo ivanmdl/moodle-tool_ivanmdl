@@ -33,8 +33,7 @@
  * @throws coding_exception
  */
 function tool_ivanmdl_extend_navigation_course(navigation_node $navref, \stdClass $course, \context $context) {
-    global $PAGE;
-
+    if (has_capability('tool/ivanmdl:view', $context)) {
         $url = new moodle_url('/admin/tool/ivanmdl/index.php', ['id' => $course->id]);
 
         $navref->add(
@@ -44,7 +43,7 @@ function tool_ivanmdl_extend_navigation_course(navigation_node $navref, \stdClas
             null,
             'ivanmdleterw'
         );
-
+    }
 }
 
 
