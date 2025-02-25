@@ -25,5 +25,5 @@ defined('MOODLE_INTERNAL') || die();
 
 $plugin->version = 2025022202;
 $plugin->component = 'tool_ivanmdl';
-$plugin->release = '1.5';
+$plugin->release = '1.7';
 
