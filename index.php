@@ -62,7 +62,7 @@ echo html_writer::div('Enrolled Users in this Course:' . $enrolledusers);
 
 if (has_capability('tool/ivanmdl:edit', $context)) {
     $addentryurl = new moodle_url('/admin/tool/ivanmdl/edit.php', ['courseid' => $cleanedid]);
-    echo $OUTPUT->single_button($addentryurl, get_string('addentry', 'tool_ivanmdl'));
+    echo $OUTPUT->single_button($addentryurl, get_string('addentry', 'tool_ivanmdl'), 'get');
 }
 
 $table = new tool_ivanmdl_table('tool_ivanmdl', $id);

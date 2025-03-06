@@ -38,6 +38,8 @@ class tool_ivanmdl_table extends table_sql {
     public function __construct($uniqueid, $courseid) {
         parent::__construct($uniqueid);
 
+        $this->set_attribute('id', 'tool_ivanmdl_table');
+
         $this->define_columns(['id', 'name', 'completed', 'priority', 'timecreated', 'edit']);
         $this->define_headers([
             get_string('id', 'tool_ivanmdl'),
