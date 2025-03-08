@@ -1,4 +1,4 @@
-@tool_ivanmdl
+@tool @tool_ivanmdl
 Feature: Verify that editing is working
 
   Background:
