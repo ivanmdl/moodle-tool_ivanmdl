@@ -24,4 +24,4 @@ Feature: Verify that editing is working
     Then the following should exist in the "tool_ivanmdl_table" table:
       | Name            | Completed   |
       | Entry Ivan Mdl  | 1           |
-    
+  
