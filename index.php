@@ -64,8 +64,7 @@ if (has_capability('tool/ivanmdl:edit', $context)) {
     $addentryurl = new moodle_url('/admin/tool/ivanmdl/edit.php', ['courseid' => $cleanedid]);
     echo $OUTPUT->single_button($addentryurl, get_string('addentry', 'tool_ivanmdl'), 'get');
 }
-
-$table = new tool_ivanmdl_table('tool_ivanmdl', $id);
+$table = new \tool_ivanmdl\table('tool_ivanmdl', $id);
 echo $table->out(20, true);
 
 echo $OUTPUT->footer();

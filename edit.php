@@ -32,8 +32,10 @@ $entry = null;
 
 $title = get_string('addentry', 'tool_ivanmdl');
 
+$handler = new \tool_ivanmdl\handler();
+
 if ($entryid) {
-    $entry = $DB->get_record('tool_ivanmdl', ['id' => $entryid], '*', MUST_EXIST);
+    $entry = $handler->get($entryid);
     $courseid = $entry->courseid;
     $title = get_string('editentry', 'tool_ivanmdl');
 }
@@ -53,22 +55,16 @@ $PAGE->set_title($title);
 $PAGE->set_heading($title);
 
 $form = new \tool_ivanmdl\form\edit_entry();
+
 $form->set_data($entry);
 
 if ($form->is_cancelled()) {
     redirect(new moodle_url('/admin/tool/ivanmdl/index.php', ['id' => $courseid]));
 } else if ($data = $form->get_data()) {
     if ($entry) {
-        $entry->name = $data->name;
-        $entry->completed = $data->completed;
-        $entry->priority = $data->priority;
-        $entry->timemodified = time();
-        $DB->update_record('tool_ivanmdl', $entry);
+        $handler->update($data, $entry);
     } else {
-        $data->courseid = $courseid;
-        $data->timecreated = time();
-        $data->timemodified = time();
-        $DB->insert_record('tool_ivanmdl', $data);
+        $handler->insert($data, $courseid);
     }
 
     redirect(new moodle_url('/admin/tool/ivanmdl/index.php',

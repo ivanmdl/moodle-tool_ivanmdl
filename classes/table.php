@@ -22,6 +22,13 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+namespace tool_ivanmdl;
+
+use table_sql;
+use moodle_url;
+use context_course;
+use pix_icon;
+
 defined('MOODLE_INTERNAL') || die();
 
 require_once($CFG->libdir . '/tablelib.php');
@@ -29,7 +36,7 @@ require_once($CFG->libdir . '/tablelib.php');
 /**
  * Class tool_ivanmdl_table for displaying table results
  */
-class tool_ivanmdl_table extends table_sql {
+class table extends table_sql {
     /**
      * Sets up table sql
      * @param string  $uniqueid
