@@ -23,6 +23,8 @@
  */
 namespace tool_ivanmdl;
 
+use stdClass;
+
 /**
  * Class for handling the entry records
  */
