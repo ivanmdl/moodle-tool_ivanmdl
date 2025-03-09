@@ -24,6 +24,7 @@
 namespace tool_ivanmdl;
 
 use stdClass;
+use context_course;
 
 /**
  * Class for handling the entry records
@@ -46,11 +47,17 @@ class handler {
      * @return void
      */
     public function update(stdClass $data, stdClass $entry) {
-        global $DB;
+        global $DB, $PAGE;
         $entry->name = $data->name;
         $entry->completed = $data->completed;
         $entry->priority = $data->priority;
         $entry->timemodified = time();
+        if (isset($data->description_editor)) {
+            $data = file_postupdate_standard_editor($data, 'description',
+                self::editor_options(), $PAGE->context, 'tool_ivanmdl', 'entry', $data->id);
+        }
+        $entry->description = $data->description;
+        $entry->descriptionformat = $data->descriptionformat;
         $DB->update_record('tool_ivanmdl', $entry);
     }
 
@@ -65,6 +72,28 @@ class handler {
         $data->courseid = $courseid;
         $data->timecreated = time();
         $data->timemodified = time();
-        return $DB->insert_record('tool_ivanmdl', $data);
+        $entryid = $DB->insert_record('tool_ivanmdl', $data);
+
+        if (isset($data->description_editor)) {
+            $context = context_course::instance($data->courseid);
+            $data = file_postupdate_standard_editor($data, 'description',
+                self::editor_options(), $context, 'tool_ivanmdl', 'entry', $entryid);
+            $updatedata = ['id' => $entryid, 'description' => $data->description,
+                'descriptionformat' => $data->descriptionformat];
+            $DB->update_record('tool_ivanmdl', $updatedata);
+        }
+
+        return $entryid;
+    }
+
+    /**
+     * Options for the editor
+     * @return array
+     */
+    public static function editor_options() {
+        global $PAGE;
+        return [
+            'context' => $PAGE->context,
+        ];
     }
 }

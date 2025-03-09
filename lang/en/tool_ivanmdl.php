@@ -24,11 +24,12 @@
 $string['addentry'] = 'Add entry';
 $string['completed'] = 'Completed';
 $string['created'] = 'Created';
+$string['description'] = 'Description';
 $string['edit'] = 'Edit';
 $string['editentry'] = 'Edit entry';
 $string['entryadded'] = 'Entry added';
 $string['entryname'] = 'Insert name';
-$string['error_name_exists'] = 'Entry namd exists';
+$string['error_name_exists'] = 'Entry name exists';
 $string['hello_world'] = 'Hello World {$a}';
 $string['id'] = 'Id';
 $string['ivanmdl:edit'] = 'ivanmdl:edit';

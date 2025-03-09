@@ -47,10 +47,11 @@ class table extends table_sql {
 
         $this->set_attribute('id', 'tool_ivanmdl_table');
 
-        $this->define_columns(['id', 'name', 'completed', 'priority', 'timecreated', 'edit']);
+        $this->define_columns(['id', 'name', 'description', 'completed', 'priority', 'timecreated', 'edit']);
         $this->define_headers([
             get_string('id', 'tool_ivanmdl'),
             get_string('name', 'tool_ivanmdl'),
+            get_string('description', 'tool_ivanmdl'),
             get_string('completed', 'tool_ivanmdl'),
             get_string('priority', 'tool_ivanmdl'),
             get_string('created', 'tool_ivanmdl'),
@@ -58,7 +59,7 @@ class table extends table_sql {
         ]);
 
         $this->set_sql(
-            'id, name, completed, priority, timecreated, courseid',
+            'id, name, completed, priority, timecreated, courseid, description, descriptionformat',
             '{tool_ivanmdl}',
             'courseid = ?',
             [$courseid]
@@ -91,5 +92,18 @@ class table extends table_sql {
         }
 
         return '';
+    }
+
+    /**
+     * Displays column description
+     *
+     * @param stdClass $row
+     * @return string
+     */
+    protected function col_description($row) {
+        $options = handler::editor_options();
+        $description = file_rewrite_pluginfile_urls($row->description, 'pluginfile.php',
+            $options['context']->id, 'tool_ivanmdl', 'entry', $row->id, $options);
+        return format_text($description, $row->descriptionformat, $options);
     }
 }

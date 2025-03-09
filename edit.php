@@ -56,6 +56,12 @@ $PAGE->set_heading($title);
 
 $form = new \tool_ivanmdl\form\edit_entry();
 
+if (!empty($entry->id)) {
+    file_prepare_standard_editor($entry, 'description',
+        \tool_ivanmdl\handler::editor_options($courseid),
+        $PAGE->context, 'tool_ivanmdl', 'entry', $entry->id);
+}
+
 $form->set_data($entry);
 
 if ($form->is_cancelled()) {

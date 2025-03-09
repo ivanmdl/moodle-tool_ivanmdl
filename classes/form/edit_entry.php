@@ -24,6 +24,8 @@
 
 namespace tool_ivanmdl\form;
 
+use tool_ivanmdl\handler;
+
 defined('MOODLE_INTERNAL') || die();
 
 require_once("$CFG->libdir/formslib.php");
@@ -45,6 +47,10 @@ class edit_entry extends \moodleform {
         $mform->addRule('name', get_string('required'), 'required');
 
         $mform->addElement('advcheckbox', 'completed', get_string('completed', 'tool_ivanmdl'));
+
+        $mform->addElement('editor', 'description_editor',
+            get_string('description', 'tool_ivanmdl'),
+            null, handler::editor_options());
 
         $mform->addElement('hidden', 'courseid', $COURSE->id);
         $mform->setType('courseid', PARAM_INT);

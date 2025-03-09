@@ -42,6 +42,8 @@ function xmldb_tool_ivanmdl_upgrade($oldversion) {
         $table->add_field('priority', XMLDB_TYPE_INTEGER, '1', null, XMLDB_NOTNULL, null, '1');
         $table->add_field('timecreated', XMLDB_TYPE_INTEGER, '10', null, null, null, null);
         $table->add_field('timemodified', XMLDB_TYPE_INTEGER, '10', null, null, null, null);
+        $table->add_field('description', XMLDB_TYPE_TEXT, null, null, null, null, null, 'timemodified');
+        $table->add_field('descriptionformat', XMLDB_TYPE_INTEGER, '10', null, null, null, null, 'description');
 
         $table->add_key('primary', XMLDB_KEY_PRIMARY, ['id']);
         $table->add_key('courseid', XMLDB_KEY_FOREIGN, ['courseid'], 'course', ['id']);
@@ -52,6 +54,23 @@ function xmldb_tool_ivanmdl_upgrade($oldversion) {
         }
 
         upgrade_plugin_savepoint(true, 2025022200, 'tool', 'ivanmdl');
+    }
+
+    if ($oldversion < 20250309001) {
+        $table = new xmldb_table('tool_ivanmdl');
+        $field = new xmldb_field('description', XMLDB_TYPE_TEXT, null, null, null, null, null, 'timemodified');
+
+        if (!$dbman->field_exists($table, $field)) {
+            $dbman->add_field($table, $field);
+        }
+
+        $field = new xmldb_field('descriptionformat', XMLDB_TYPE_INTEGER, '10', null, null, null, null, 'description');
+
+        if (!$dbman->field_exists($table, $field)) {
+            $dbman->add_field($table, $field);
+        }
+
+        upgrade_plugin_savepoint(true, 20250309001, 'tool', 'ivanmdl');
     }
 
     return true;
