@@ -52,21 +52,23 @@ $enrolledusers = $DB->count_records_sql("
     [$id]
 );
 
-echo $OUTPUT->header();
-echo $OUTPUT->heading($title);
+$helloworld = get_string('hello_world', 'tool_ivanmdl', $cleanedid);
 
-echo html_writer::div(get_string('hello_world', 'tool_ivanmdl', $cleanedid));
+$statisticoutput = new \tool_ivanmdl\output\statistic($usercount, $enrolledusers, $helloworld);
+$output = $PAGE->get_renderer('tool_ivanmdl');
 
-echo html_writer::div('Total Registered Users:' . $usercount);
-echo html_writer::div('Enrolled Users in this Course:' . $enrolledusers);
+echo $output->header();
+echo $output->heading($title);
+
+echo $output->render($statisticoutput);
 
 if (has_capability('tool/ivanmdl:edit', $context)) {
     $addentryurl = new moodle_url('/admin/tool/ivanmdl/edit.php', ['courseid' => $cleanedid]);
-    echo $OUTPUT->single_button($addentryurl, get_string('addentry', 'tool_ivanmdl'), 'get');
+    echo $output->single_button($addentryurl, get_string('addentry', 'tool_ivanmdl'), 'get');
 }
 $table = new \tool_ivanmdl\table('tool_ivanmdl', $id);
 echo $table->out(20, true);
 
-echo $OUTPUT->footer();
+echo $output->footer();
 
 

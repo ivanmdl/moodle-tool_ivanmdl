@@ -15,15 +15,27 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Version for my first plugin
- * @package   tool_ivanmdl
- * @copyright 2025, Ivan Stankovic <ivan.stankovic@moodle.com>
- * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ *  renderer.php description here.
+ *
+ * @package tool_ivanmdl
+ * @copyright  2025 ivanstankovic <ivan.stankovic@moodle.com>
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+namespace tool_ivanmdl\output;
 
-$plugin->version = 20250309002;
-$plugin->component = 'tool_ivanmdl';
-$plugin->release = '2.2';
+use tool_ivanmdl\output\statistic;
 
+/**
+ * Class for rendering output
+ */
+class renderer extends \plugin_renderer_base {
+    /**
+     * Method for rendering output
+     * @param \tool_ivanmdl\output\statistic $page
+     * @return bool|string
+     */
+    public function render_statistic(statistic $page) {
+        return $this->render_from_template('tool_ivanmdl/statistic', $page->export_for_template($this));
+    }
+}
